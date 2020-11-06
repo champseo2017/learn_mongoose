@@ -105,4 +105,13 @@ const getStudents = async () => {
     console.log(students);
 }
 getStudents();
+
+ในทางกลับกันหากเราคิวรี เพื่อนำข้อมูลทั้งหมดมาใช้ ยกเว้นงานอดิเรก และ สถานะของนักเรียน
+const getStudents = async () => {
+    const students = await Student
+    .find()
+    .select({hobbies:0, isStudying: 0})
+    console.log(students);
+}
+getStudents();
 */
