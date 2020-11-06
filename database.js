@@ -164,4 +164,14 @@ const getStudents = async () => {
     console.log(students);
 }
 getStudents();
+
+ต้องการค้นหานักเรียนที่อยู่ห้อง 6/1 หรือนักเรียนที่มีคะแนนมากกว่า 80
+
+const getStudents = async () => {
+    const students = await Student
+    .find()
+    .or([{class: '6/1'}, {score: {$gt: 80}}])
+    console.log(students)
+}
+getStudents();
 */
