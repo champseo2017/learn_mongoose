@@ -62,4 +62,12 @@ const getStudents = async() => {
 
 getStudents(query);
 
+เราสามารถกำหนดคู่ key:value ได้หลายชุด
+const query = {class: '6/1', hobbies: 'Swimming'};
+const getStudents = async() => {
+    const students = await Student.find(condition);
+    console.log(students);
+}
+
+getStudents(query);
 */
