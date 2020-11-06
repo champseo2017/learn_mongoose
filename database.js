@@ -114,4 +114,17 @@ const getStudents = async () => {
     console.log(students);
 }
 getStudents();
+
+
+ดึงข้อมูลโดยใช้ comparison operator
+คิวรี่ข้อมูลใช้วิธีการเปรียบเทียบ เราจะใช้ตัวดำเนินการการเปรียบเทียบ MongoDB
+comparison operator 
+eq เท่ากับ (equal)
+ืne ไม่เท่ากับ (not equal)
+gt มากกว่า (greater than)
+gte มากกว่าหรือเท่ากับ (greater than or equal to)
+lt น้อยกว่า (less than)
+lte น้อยกว่าหรือเท่ากับ (less than or equal to)
+in รสมอยู่ใน (include)
+ืnin ไม่รวมอยู่ (not include)
 */
