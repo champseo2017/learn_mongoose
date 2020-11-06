@@ -95,4 +95,14 @@ const getStudents = async () => {
 }
 
 getStudents();
+
+ดึงข้อมูลโดยเลือกเฉพาะพร็อพเพอร์ตี้ที่ต้องการ ใช้เมธอด select
+ตัวอย่างการแสดงเฉพาะรายชื่อนักเรียน และชื่อห้องเท่านั้น
+const getStudents = async () => {
+    const students = await Student
+    .find()
+    .select({name:1, class:1})
+    console.log(students);
+}
+getStudents();
 */
