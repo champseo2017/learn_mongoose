@@ -81,4 +81,18 @@ const getStudents = async () => {
     console.log(students)
 }
 getStudents();
+
+ดึงข้อมูลโดยจำกัดจำนวนผลลัพธ์
+ถ้าเราต้องการจำกัดจำนวนผลลัพธ์ใช้เมธอด limit โดยกำหนดจำนวนผลลัพธ์เช่น limit(5) เป็นต้น แต่ก่อนที่จะจำกัดผลลัพธ์ เราควรจัดเรียง
+ผลลัพธ์เสียก่อนด้วยเมธอด sort
+
+const getStudents = async () => {
+    const students = await Student
+    .find({class: '6/2'})
+    .sort({id: -1})
+    .limit(2);
+    console.log(students)
+}
+
+getStudents();
 */
