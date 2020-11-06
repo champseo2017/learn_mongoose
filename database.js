@@ -53,4 +53,13 @@ const getStudents = async() => {
 
 getStudents();
 
+ดึงข้อมูลโดยกำหนดเงื่อนไข
+const query = {class: '6/1'}
+const getStudents = async() => {
+    const students = await Student.find(condition);
+    console.log(students);
+}
+
+getStudents(query);
+
 */
