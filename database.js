@@ -129,5 +129,15 @@ in รสมอยู่ใน (include)
 ืnin ไม่รวมอยู่ (not include)
 
 เมื่อต้องการแสดงนักเรียนที่มีคะแนนมากกว่าหรือเท่ากับ 80 เราจะใช้โอเปอเรเตอร์ gte
+const getStudents = async () => {
+    const students = await Students.find({score: {$gte: 80}});
+    console.log(students);
+}
 
+ถ้าต้องการแสดงนักเรียนที่มีคะแนนอยู่ระหว่าง 70 ถึง 80 เราจะกำหนดออกเจ็กต์สำหรับใช้เป็นเงื่อนไขในการคิวรี ด้วยโอเปอเรเตอร์ gte และ lt 
+const getStudents = async () => {
+    const students = await Student.find({score: {$gt: 70, $lt: 80}})
+    console.log(students);
+}
+getStudents();
 */
