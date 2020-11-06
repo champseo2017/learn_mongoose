@@ -70,4 +70,15 @@ const getStudents = async() => {
 }
 
 getStudents(query);
+
+ดึงข้อมูลพร้อมจัดเรียงข้อมูล
+เราจะใช้เมธอด sort เพื่อกำหนดว่าจะให้ข้อมูลที่ได้ เรียงจากน้อยไปหามากหรือมากไปหาน้อย โดยผ่านค่าเป็น 1 หากต้องการเรียงจากน้อยไปมาก
+และผ่านค่าเป็น -1 เมื่อต้องการกำหนดจากมากไปหาน้อย
+const getStudents = async () => {
+    const students = await Student
+    .find({class: '6/1'})
+    .sort({id: 1});
+    console.log(students)
+}
+getStudents();
 */
