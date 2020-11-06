@@ -1,0 +1,80 @@
+net stop MongoDB เพื่อหยุดการทำงานของ MongoDB
+- เชื่อมต่อไปยัง MongoDB - mongo
+- สั่งเปิดใช้งาน MongoDB เซิร์ฟเวอร์
+  - mongod ค่าเริ่มต้น ไคลเอนต์จะเชื่อมไปยังเซิร์ฟเวอร์ จะติดต่อทางพอร์ต 27017
+- คำสั่ง show dbs เพื่อแสดงรายชื่อฐานข้อมูลทั้งหมด
+- db.students.insertOne({
+    name: "Jeerawuth",
+    age: 45
+})  เพิ่มข้อมูลไปยังฐานข้อมูล และ คอลเลกชั่นที่ชื่อว่า students
+
+การลบฐานข้อมูล
+-เราต้องเลือกฐานข้อมูลที่ต้องการจะลบก่อนจากนั้นเลือกคำสั่ง db.dropDatabase()
+
+การแสดงรายชื่อ collections ที่อยู่ในฐานข้อมูล
+- เราจะใช้คำสั่ง db.getCollectionNames()
+
+วิธีเพิ่ม Document ไปยัง collections
+ถ้าต้องการเพิ่ม Document รายการเดียว เราจะใช้คำสั่ง insertOne() แต่ถ้าต้องการเพิ่ม Document หลายรายการพร้อมกันจะต้องกำหนดอาร์เรย์
+ลงใน insertMany() 
+รูปแบบ
+insertOne(data, options)
+insertMany([date], options)
+
+การตรวจสอบผลลัพธ์การแทรกข้อมูลลงใน students คอลเลกชันดังนี้
+- db.students.find().pretty()
+
+ไอดีสามารถกำหนดด้วยตัวเองก็ได้ แค่เป็นข้อความหรือตัวเลขที่ไม่ซ้ำกันกับไอดีอื่นๆ ที่เคยกำหนดไว้ก่อนหน้านี้
+-db.students.insertOne({_id:"ess12345", name: "Sombat", age: 44})
+
+การเพิ่มข้อมูลหลายข้อมูลใน documents
+- db.students.insertMany([{name: "Somboon", age: 44}, {name: "Supaporn", age: 35}])
+
+CRUD
+Create
+ - createOne(data, options) เพิ่ม Document ลงไปในฐานข้อมูลเพียงรายการเดียว
+ - createMany(data, options) เพิ่ม Document ลงไปในฐานข้อมูลหลายรายการพร้อมกัน
+Read คือคำสั่งที่ใช้เพิ่อดึงข้อมูลที่ต้องการออกมาจากฐานข้อมูล
+ - find(filter, options) เลือกเอกสาร (Document) ทั้งหมดที่ตรงกับเงื่อนไข
+ - findOne(filter, options) เลือกเอกสาร (Document) ที่ตรงกับเงื่อนไขเพียงรายการเดียวเท่านั้น หากมีหลายเอกสารที่ตรงกับเงื่อนไขที่กำหนด
+ ผลลัพธ์การค้นจะเป็นเอกสาร (Document) ลำดับแรกที่พบก่อน
+๊Update คือการแก้ไขเอกสาร (Document) ที่อยู่ในฐานข้อมูล โดยมีคำสั่งให้เลือกใช้งานดังนี้
+ - updateOne(filter, data, options)
+ - updateMany(filtet, data, options)
+ - replace(filtet, data, options)
+Delete คือ การลบ (Document) ออกจากฐานข้อมูล ซึ้งมีอยู่ด้วยกันหลายวิธี เช่น
+ - deleteOne(filter, options)
+ - deleteMany(filter, options)
+
+ดู Document ที่อยู่ในคอลเลกชันที่สนใจ
+ค้นหานักเรียนที่ชื่อว่า Supaporn ที่อยู่ในคอเลกชัน students 
+โดยพิมพ์คำสั่ง db.students.findOne({name: "Suppaporn"}) สังเกตว่าเราจะต้องผ่านค่าออบเจ็กต์เข้าไปยังเมธอด findOne() เพื่อกำหนดเงื่อนไขใน
+เงื่อนไขในการค้นหาข้อมูล
+
+ค้นหานักเรียนทั้งหมดที่อยู่ในคอลเลกชัน students โดยพิมพ์คำสั่ง db.students.find() (การจัดเรียงผลลัพธ์ในเมธอด find() ใช้ pretty())
+
+อัพเดตข้อมูลใน Document
+ update หลายรายการใช้ updateMany(filter, options) โดยกำหนด filter ภายในเครื่องหมาย {} เช่น ใช้คำสั่ง 
+ db.students.updateMany({}, {$set: {classRoom: "6/1"}}) เพื่อกำหนดค่า classRoom เท่ากับ 6/1 ไปยังนักเรียกทุกคน
+
+ การลบ Document
+ db.students.deleteOne({name: "Somboom"})
+ ลบทั้งหมด db.students.deleteMany({})
+
+ การใช้ filter โดยกำหนด MongoDB Operator
+ ถ้าเราต้องการค้นหา Document โดยกำหนดเงื่อนไขว่า ข้อมูลต้องมากกว่าค่าที่กำหนด จะกำหนดเป็น condition: {$gi: {value}}
+ db.students.find({age: {$gt: 15}}) มากกว่า $gt
+ หากต้องการค้นหานักเรียนที่มีอายุน้อยกว่า 30
+ db.students.find({age: {$lt:30}}).pretty()
+ 
+ ถ้าต้องการค้นหาเพียงรายการเดียว เราจะใช้ findOne โดยเมธอด findOne จะไม่รองรับเมธอด pretty() เพราะผลลัพธ์จะแสดงเป็นเหมือน
+ กับการเรียกใช้งานเมธอด pretty() อยู่แล้ว
+
+ db.students.findOne({age: {$lt: 30}})
+
+ การเข้าไปยังส่วนต่างๆ documents ด้วยจุด
+ การใช้ filter เข้าไปยังอาร์เรย์ hobby โดยระบุชื่อคีย์ แล้วก็นำเอาค่าของอาร์เรย์มาใช้
+ db.passengers.find({hobby: "tennis"})
+
+ ต่อไปนี้คือตัวอย่างการเข้าไปยังอาร์เรย์ child ที่อยู่ใน Embedded Object ชื่อว่า child 
+ db.passengers.find({"details.child": "doe"}).pretty()
