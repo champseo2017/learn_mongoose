@@ -155,4 +155,13 @@ getStudents();
 
 Or ตรงเงื่อนไขเพียงส่วนเดียวก็ใช้ได้
 And ต้องตรงเงื่อนไขทั้งหมดเท่านั้น
+
+หานักเรียนที่อยู่ห้อง 6/1 และมีคะแนนเป็น 80 ซึ้งประกอบด้วย 2 เงื่อนไข ดังนี้
+const getStudents = async () => {
+    const students = await Student
+    .find()
+    .and([{class: '6/1'}, {score: 70}])
+    console.log(students);
+}
+getStudents();
 */
