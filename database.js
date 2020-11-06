@@ -40,3 +40,17 @@ const createStudent = async() => {
 }
 
 createStudent();
+
+/* 
+คิวรี่ Document จากฐานข้อมูล
+ดึงข้อมูลมาทั้งหมด
+ใช้เมธอด find() เพื่อดึงข้อมูลนักเรียนทั้งหมดออกมาแสดง
+
+const getStudents = async() => {
+    const students = await Student.find()
+    console.log(students)
+}
+
+getStudents();
+
+*/
