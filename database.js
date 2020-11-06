@@ -140,4 +140,14 @@ const getStudents = async () => {
     console.log(students);
 }
 getStudents();
+
+ถ้าต้องการแสดงรายชื่อนักเรียนที่มีคะแนน เป็น 70, 80 และ 90 ก็สามารถใช้โอเปอร์เรเตอร์ in 
+const getStudents = async () => {
+    const students = await Student.find({
+        score: {$in: [70, 80, 90]}
+    })
+    console.log(students);
+}
+
+getStudents();
 */
