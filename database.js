@@ -199,4 +199,18 @@ async function getStudents () {
     console.log(students)
 }
 getStudents()
+
+นับจำนวน Document ที่ได้จากการคิวรี่
+หากเราต้องการนับข้อมูลที่ได้จากการคิวรี เราจะใช้เมธอด countDocument()
+ซึ้งผลลัพธ์จะเป็นตัวเลขแสดงจำนวน Document ที่ถูกดึงมาจากฐานข้อมูล เช่น 
+นักเรียนทั้งหมดที่อยู่ในห้อง 6/1 
+
+async function getStudents() {
+    const students = await Student
+    .find({class: '6/1'})
+    .countDocuments();
+    console.log(students)
+}
+
+getStudents()
 */
