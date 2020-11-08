@@ -24,22 +24,50 @@ const studentSchema = new mongoose.Schema({
 });
 
 const Student = mongoose.model("Student", studentSchema);
-const createStudent = async() => {
-  const student = Student({
-    id: "0523301122",
-    name: "Worrawank",
-    hobbies: ["Running", "Pingpong"],
-    class: '6/1',
-    score: 84,
-    isStudying: true,
-  });
-
-  const data = await student.save();
-  console.log(data);
-  
+async function updateStudent(id) {
+    const student = await Student
+    .findById(id)
+    if(!student){
+        return;
+    }else{
+        student.score = 99;
+        student.save();
+    }
 }
+updateStudent("5fa57a3f6ea2a026788488b0");
+/* 
+อัพเดตข้อมูลนักเรียน โดยค้นหารายชื่อนักเรียนจาก ObjectId ซึ้งเป็นรหัสของแต่ละ Document ในฐานข้อมูล จากนั้นให้เปลี่ยน
+คะแนนสอบของนักเรียน
 
-createStudent();
+async function updateStudent(id) {
+    const student = await Student
+    .findById(id)
+    if(!student){
+        return;
+    }else{
+        student.score = 99;
+        student.save();
+    }
+}
+updateStudent("");
+
+*/
+// const createStudent = async() => {
+//   const student = Student({
+//     id: "0523301122",
+//     name: "Worrawank",
+//     hobbies: ["Running", "Pingpong"],
+//     class: '6/1',
+//     score: 84,
+//     isStudying: true,
+//   });
+
+//   const data = await student.save();
+//   console.log(data);
+  
+// }
+
+// createStudent();
 
 /* 
 คิวรี่ Document จากฐานข้อมูล
