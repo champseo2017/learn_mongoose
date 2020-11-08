@@ -174,4 +174,21 @@ const getStudents = async () => {
     console.log(students)
 }
 getStudents();
+
+กำหนดเงื่อนไขด้วย regular expression
+เช่น หากต้องการตรวจสอบข้อความว่า ขึ้นต้นด้วย love หรือไม่ ก็จะกำหนดเป็น 
+/^love/
+หรือถ้าต้องการตรวจสอบข้อความว่า ลงท้ายด้วย love ก็จะกำหนดเป็น /love$/
+และถ้าต้องการตรวจสอบว่ามีคำว่า love อยู่ตรงไหนก็ได้ ก็ให้กำหนดเป็น /.*love.*/
+//
+/* 
+ต้องการแสดงรายชื่อนักเรียนที่ขึ้นต้นด้วย s ก็สามารถใช้ regular express กำนหดได้
+async function getStudents() {
+    const students = await Student
+    .find({name: /^S/i})
+    console.log(students)
+}
+
+getStudents();
+
 */
