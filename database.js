@@ -191,4 +191,12 @@ async function getStudents() {
 
 getStudents();
 
+ต้องการแสดงรายชื่อนักเรียนที่ลงท้ายด้วย porn และอยู่ในห้อง 6/1
+async function getStudents () {
+    const students = await Student
+    .find()
+    .and([{name:'/porn$/'}, [class: '6/1']]);
+    console.log(students)
+}
+getStudents()
 */
