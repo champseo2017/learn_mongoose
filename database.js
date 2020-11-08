@@ -213,4 +213,17 @@ async function getStudents() {
 }
 
 getStudents()
+
+แบ่งข้อมูลออกเป็นหน้า Paging
+ในโมดูล Mongoose จะมีเมธอด skip() สำหรับแบ่งข้อมูลออกเป็นหน้าย่อยๆ
+async function getStudents() {
+    var pageSize = 5;
+    var pageNumber = 2;
+    const students = await Student
+    .find()
+    .skip((pageNumber - 1) * pageSize)
+    .limit(pageSize);
+    console.log(students);
+}
+getStudents();
 */
