@@ -24,41 +24,24 @@ const studentSchema = new mongoose.Schema({
 });
 
 const Student = mongoose.model("Student", studentSchema);
-async function updateStudent(id) {
+const updateStudent = async (id) => {
     const student = await Student
-    .findById(id)
+    .findById(id);
     if(!student){
-        return;
-    }else{
+        return
+    } else{
         student.score = 99;
         student.save();
     }
 }
-updateStudent("5fa57a3f6ea2a026788488b0");
-/* 
-อัพเดตข้อมูลนักเรียน โดยค้นหารายชื่อนักเรียนจาก ObjectId ซึ้งเป็นรหัสของแต่ละ Document ในฐานข้อมูล จากนั้นให้เปลี่ยน
-คะแนนสอบของนักเรียน
-
-async function updateStudent(id) {
-    const student = await Student
-    .findById(id)
-    if(!student){
-        return;
-    }else{
-        student.score = 99;
-        student.save();
-    }
-}
-updateStudent("");
-
-*/
+updateStudent("5fa57a3f6ea2a026788488b0")
 // const createStudent = async() => {
 //   const student = Student({
 //     id: "0523301122",
 //     name: "Worrawank",
 //     hobbies: ["Running", "Pingpong"],
 //     class: '6/1',
-//     score: 84,
+//     score: 99,
 //     isStudying: true,
 //   });
 
