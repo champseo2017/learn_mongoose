@@ -25,13 +25,13 @@ const studentSchema = new mongoose.Schema({
 
 const Student = mongoose.model("Student", studentSchema);
 /* 
-อัพเดตคะแนนของนักเรียนทุกๆ คน โดยลดคะแนนลงเหลือ 80% จากคะแนนเดิม 7/1 เราจะใช้เมธอด updateMany() เพื่ออัพเดตนักเรียนหลายรายการพร้อมกัน และใช้โอเปอเรเตอร์ $mul เพื่อคูณคะแนนเดิมด้วย 0.8 
+อัพเดตคะแนนของนักเรียนห้อง 6/2 โดยดูว่า หากคนไหนคะแนนน้อยกว่า 50 ก็จะเปลียนเป็น 50 ทันที ดังนั้นตัวอย่างนี้จึงใช้เมธอด updateMany() เพื่ออัพเดตนักเรียนหลายรายการพร้อมกัน และใช้โอเปอร์เรเตอร์ $max เพื่อแก้ไขค่า score
 
 */
 const updateStudent = async (studentClass) => {
   const student = await Student.updateMany(
     { class: studentClass },
-    { $mul: { score:0.8 } }
+    { $max: { score:200 } }
   );
   console.log(student);
 };
