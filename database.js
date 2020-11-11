@@ -25,18 +25,18 @@ const studentSchema = new mongoose.Schema({
 
 const Student = mongoose.model("Student", studentSchema);
 /* 
-อัพเดตคะแนนของนักเรียนที่มีรหัสเป็น 06 ให้มีค่าเป็น 100 ในตัวอย่างนี้จึงใช้เมธอด updateOne() เพื่ออัพเดตนักเรียนเพียงคนเดียว และใช้โอเปอเรเตอร์ $set เพื่อแก้ไขค่า score
+อัพเดตห้องเรียนจาก 6/1 ให้กลายเป็น 7/1 เราจะใช้เมธอด updateMany() เพื่ออัพเดตนักเรียนหลายรายการพร้อมกัน ส่วนคำสั่งสำหรับอัพเดตข้อมูลเราจะใช้โอเปอร์เรเตอร์ $set 
 
 
 */
-const updateStudent = async (id) => {
-  const student = await Student.updateOne(
-    { _id: id },
-    { $set: { score: 100 } }
+const updateStudent = async (studentClass) => {
+  const student = await Student.updateMany(
+    { class: studentClass },
+    { $set: { class: '7/1', isStudying: false } }
   );
   console.log(student);
 };
-updateStudent("5fa57a3f6ea2a026788488b0");
+updateStudent("6/1");
 // const createStudent = async() => {
 //   const student = Student({
 //     id: "0523301122",
