@@ -25,17 +25,29 @@ const studentSchema = new mongoose.Schema({
 
 const Student = mongoose.model("Student", studentSchema);
 /* 
-อัพเดตคะแนนของนักเรียนห้อง 6/2 โดยดูว่า หากคนไหนคะแนนน้อยกว่า 50 ก็จะเปลียนเป็น 50 ทันที ดังนั้นตัวอย่างนี้จึงใช้เมธอด updateMany() เพื่ออัพเดตนักเรียนหลายรายการพร้อมกัน และใช้โอเปอร์เรเตอร์ $max เพื่อแก้ไขค่า score
+อัพเดตคะแนนของนักเรียนที่มีรหัสนักเรียนเป็น 061022004 ให้มีค่าเป็น 100 โดยต้องการให้รีเทิร์นผลลัพธ์หลังการอัพเดตด้วย ซึ้งตัวอย่างนี้เราจะใช้เมธอด findOneAndUpdate() ใช้เพื่อค้นหาและอัพเดตนักเรียนเพียงคนเดียว และใช้โอเปอร์เรเตอร์ $set เพื่อแก้ไขค่าคะแนนของนักเรียน
 
+เมธอด findOneAndUpdate(Condition, Update, Options, Callback?) จะมีพารามิเตอร์อยู่ 4 ตัวดังนี้
+
+- พารามิเตอร์ Condition คือ คิวรีออบเจ็กต์สำหรับกำหนดเงื่อนไขในการนำข้อมูลมาจากฐานข้อมูล เช่น {id: '06102004'} หมายถึง ต้องการนักเรียนที่มีรหัสเป็น 06
+- พารามิเตอร์ Update กำหนดว่าจะให้อัพเดตไหนด้วยค่าอะไร เช่น {$set: {score: 100}} หมายถึงต้องการกำหนดค่าให้ score มีค่าเป็น 100
+
+- พารามิเตอร์ Options กำหนดตัวเลือกที่ใช้กับเมธอด เช่น {new: true} จะหมายถึงต้องการให้รีเทิร์นผลลัพธ์เป็นข้อมูลหลังอัพเดตแล้ว แต่ถ้ากำหนดเป็น {new: false} ก็จะรีเทิร์นผลลัพธ์เป็นข้อมูลก่อนอัพเดตแทน
+
+- พารามิเตอร์ Callbacl? คือฟังก์ชันที่จะถูกเรียกใช้งานหลังอัพเดตข้อมูลแล้ว
 */
-const updateStudent = async (studentClass) => {
-  const student = await Student.updateMany(
-    { class: studentClass },
-    { $max: { score:200 } }
+const updateStudent = async (studentId) => {
+  const student = await Student.findOneAndUpdate(
+    { '_id': studentId },
+    { $set: { score:5555 } },
+    {useFindAndModify: false},
+    function(err, doc) {
+        // do something here
+    }
   );
   console.log(student);
 };
-updateStudent("7/1");
+updateStudent("5fa82c0b1aaa123d74464e66");
 // const createStudent = async() => {
 //   const student = Student({
 //     id: "0523301122",
