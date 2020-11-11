@@ -25,26 +25,18 @@ const studentSchema = new mongoose.Schema({
 
 const Student = mongoose.model("Student", studentSchema);
 /* 
-แสดงข้อมูลหลังอัพเดต Document ในฐานข้อมูล
-เนื่องจากการเซฟข้อมูลจะเป็น Asynchronous Operation ดังนั้น เมื่อสั่งให้อัพเดตฐานข้อมูล เราต้อง
-รอให้ข้อมูลอัพเดตโดยสมบูรณ์เสียก่อน จึงจะสามารถนำเอาข้อมูลที่เพิ่งอัพเดตไปใช้งานได้
-เมื่อเรียกเมธอด save() จะรีเทิร์นข้อมูลนัพเรียนกลับมา
-เมธอด save() เป็น Asynchronous Operation เราจึงต้องใส่ await ที่หน้าเมธอด save() เพื่อรอข้อมูล
+อัพเดตคะแนนของนักเรียนที่มีรหัสเป็น 06 ให้มีค่าเป็น 100 ในตัวอย่างนี้จึงใช้เมธอด updateOne() เพื่ออัพเดตนักเรียนเพียงคนเดียว และใช้โอเปอเรเตอร์ $set เพื่อแก้ไขค่า score
 
 
 */
 const updateStudent = async (id) => {
-    const student = await Student
-    .findOne({"_id": id});
-    if(!student){
-        return
-    } else{
-        student.score = 250;
-        const currentStudent = await student.save();
-        console.log(currentStudent);
-    }
-}
-updateStudent("5fa57a3f6ea2a026788488b0")
+  const student = await Student.updateOne(
+    { _id: id },
+    { $set: { score: 100 } }
+  );
+  console.log(student);
+};
+updateStudent("5fa57a3f6ea2a026788488b0");
 // const createStudent = async() => {
 //   const student = Student({
 //     id: "0523301122",
@@ -57,7 +49,7 @@ updateStudent("5fa57a3f6ea2a026788488b0")
 
 //   const data = await student.save();
 //   console.log(data);
-  
+
 // }
 
 // createStudent();
