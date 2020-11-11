@@ -25,18 +25,17 @@ const studentSchema = new mongoose.Schema({
 
 const Student = mongoose.model("Student", studentSchema);
 /* 
-อัพเดตห้องเรียนจาก 6/1 ให้กลายเป็น 7/1 เราจะใช้เมธอด updateMany() เพื่ออัพเดตนักเรียนหลายรายการพร้อมกัน ส่วนคำสั่งสำหรับอัพเดตข้อมูลเราจะใช้โอเปอร์เรเตอร์ $set 
-
+อัพเดตคะแนนของนักเรียนทุกๆ คน โดยลดคะแนนลงเหลือ 80% จากคะแนนเดิม 7/1 เราจะใช้เมธอด updateMany() เพื่ออัพเดตนักเรียนหลายรายการพร้อมกัน และใช้โอเปอเรเตอร์ $mul เพื่อคูณคะแนนเดิมด้วย 0.8 
 
 */
 const updateStudent = async (studentClass) => {
   const student = await Student.updateMany(
     { class: studentClass },
-    { $set: { class: '7/1', isStudying: false } }
+    { $mul: { score:0.8 } }
   );
   console.log(student);
 };
-updateStudent("6/1");
+updateStudent("7/1");
 // const createStudent = async() => {
 //   const student = Student({
 //     id: "0523301122",
