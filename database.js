@@ -24,13 +24,17 @@ const studentSchema = new mongoose.Schema({
 });
 
 const Student = mongoose.model("Student", studentSchema);
+/* 
+อัพเดตข้อมูลนักเรียน โดยค้นหารายชื่อนักเรียนจากรหัสของนักเรียนจากนั้นให้เปลียนคะแนนสอบของนักเรียน ใช้เมธอด findOne() เพื่อคิวรีข้อมูลจากฐานข้อมูล และผลลัพธ์จะเป็นในรูปแบบ Document เพียงรายการเดียว เมธอด findOne({'_id':''})
+
+*/
 const updateStudent = async (id) => {
     const student = await Student
-    .findById(id);
+    .findOne({"_id": id});
     if(!student){
         return
     } else{
-        student.score = 99;
+        student.score = 200;
         student.save();
     }
 }
